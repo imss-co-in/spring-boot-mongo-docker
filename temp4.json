@@ -41,6 +41,7 @@
       "kind": "ImageStream",
       "metadata": {
         "name": "${NAME}"
+        "label": "${NAME}"
       }
     }
   ],
