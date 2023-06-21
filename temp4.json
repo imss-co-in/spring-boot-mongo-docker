@@ -30,7 +30,7 @@
         },
         "nodeMounts": [
           {
-            "mountPath": "home/jenkins/",
+            "mountPath": "/home/jenkins/",
             "name": "workspace-volume"
           }
         ]
