@@ -41,7 +41,9 @@
       "kind": "ImageStream",
       "metadata": {
         "name": "${NAME}"
-        "label": "${NAME}"
+        "label": {
+           "app" : "${NAME}"
+        }
       }
     }
   ],
