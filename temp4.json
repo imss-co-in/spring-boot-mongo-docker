@@ -26,7 +26,7 @@
           }
         },
         "nodeSelector": {
-          "agent": "custommaven" // Replace "maven-agent" with the label of your Jenkins agent
+          "agent": "custommaven" 
         },
         "nodeMounts": [
           {
