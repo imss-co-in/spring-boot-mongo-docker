@@ -1,0 +1,61 @@
+{
+  "apiVersion": "template.openshift.io/v1",
+  "kind": "Template",
+  "metadata": {
+    "name": "{NAME}"
+  },
+  "objects": [
+    {
+      "apiVersion": "build.openshift.io/v1",
+      "kind": "BuildConfig",
+      "metadata": {
+        "name": "${NAME}"
+      },
+      "spec": {
+        "source": {
+          "type": "Docker",
+          "dockerfile": "Dockerfile"
+        },
+        "strategy": {
+          "type": "Docker"
+        },
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "${NAME}:latest"
+          }
+        },
+        "nodeSelector": {
+          "agent": "custommaven" // Replace "maven-agent" with the label of your Jenkins agent
+        },
+        "nodeMounts": [
+          {
+            "mountPath": "/home/jenkins/workspace/jenkins/",
+            "name": "workspace-volume"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "image.openshift.io/v1",
+      "kind": "ImageStream",
+      "metadata": {
+        "name": "${NAME}"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "NAME",
+      "displayName": "BuildConfig Name",
+      "description": "The name of the BuildConfig and ImageStream",
+      "required": true
+    }
+  ],
+  "volumes": [
+    {
+      "name": "workspace-volume",
+      "emptyDir": {}
+    }
+  ]
+}
